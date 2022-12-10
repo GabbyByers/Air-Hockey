@@ -1,9 +1,9 @@
 #include "backround.h"
 
-Backround::Backround(int init_margin, int init_width, int init_height) {
-    margin = init_margin;
-    width = init_width;
-    height = init_height;
+Backround::Backround(Game& game) {
+    margin = game.margin;
+    width = game.screen_width;
+    height = game.screen_height;
     initialize_vertices();
 }
 

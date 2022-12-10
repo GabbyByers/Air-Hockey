@@ -1,4 +1,5 @@
 #include <SFML\Graphics.hpp>
+#include "game.h"
 #include <vector>
 using std::vector;
 #pragma once
@@ -14,7 +15,7 @@ public:
     vector<sf::Vertex> vertices;
     sf::Color color = sf::Color(80, 80, 80);
 
-    Backround(int init_margin, int init_width, int init_height);
+    Backround(Game& game);
 
     void initialize_vertices();
 

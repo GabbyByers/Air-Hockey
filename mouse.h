@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "game.h"
 #pragma once
 
 class Mouse {
@@ -13,7 +14,7 @@ public:
     int height = 0;
     bool isOverScreen = false;
 
-    Mouse(int w, int h);
+    Mouse(Game& game);
 
     void setMouseProperties(sf::Vector2i vect);
 

@@ -1,8 +1,9 @@
 #include "mouse.h"
+#include "game.h"
 
-Mouse::Mouse(int w, int h) {
-    width = w;
-    height = h;
+Mouse::Mouse(Game& game) {
+    width = game.screen_width;
+    height = game.screen_height;
 }
 
 void Mouse::setMouseProperties(sf::Vector2i vect) {

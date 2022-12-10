@@ -1,9 +1,9 @@
 #include "handle.h"
 
-Handle::Handle(bool is_left, int _screen_width, int _screen_height, int _margin) {
-    screen_width = _screen_width;
-    screen_height = _screen_height;
-    margin = _margin;
+Handle::Handle(bool is_left, Game& game) {
+    screen_width = game.screen_width;
+    screen_height = game.screen_height;
+    margin = game.margin;
     left = is_left;
     cache_xy();
 }
