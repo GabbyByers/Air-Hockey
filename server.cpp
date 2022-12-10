@@ -23,7 +23,7 @@ void Server::bind() {
 }
 
 void Server::receive_client_packet() {
-    if (socket.receive(incoming_data, sizeof(incoming_data), bytes_received, return_address, return_port) == sf::Socket::Done) {
+    if (socket.receive(incoming_data, incoming_data_size, bytes_received, return_address, return_port) == sf::Socket::Done) {
         client_mouse_x = *(reinterpret_cast<int*>(&incoming_data[0]));
         client_mouse_y = *(reinterpret_cast<int*>(&incoming_data[4]));
     }
@@ -38,9 +38,12 @@ void Server::server_reponse_to_client() {
     *(reinterpret_cast<float*>(&outgoing_data[index])) = host_handle.y_pos; index += sizeof(float);
     *(reinterpret_cast<float*>(&outgoing_data[index])) = client_handle.x_pos; index += sizeof(float);
     *(reinterpret_cast<float*>(&outgoing_data[index])) = client_handle.y_pos; index += sizeof(float);
-    cout << "HX = " << host_handle.x_pos << ", HY = " << host_handle.y_pos << ", CX = " << client_handle.x_pos << ", CY = " << client_handle.y_pos << "\n";
+    *(reinterpret_cast<float*>(&outgoing_data[index])) = ball.x_pos; index += sizeof(float);
+    *(reinterpret_cast<float*>(&outgoing_data[index])) = ball.y_pos; index += sizeof(float);
+    *(reinterpret_cast<float*>(&outgoing_data[index])) = mouse.x; index += sizeof(int);
+    *(reinterpret_cast<float*>(&outgoing_data[index])) = mouse.y; index += sizeof(int);
     
-    if (socket.send(outgoing_data, sizeof(outgoing_data), return_address, return_port) != sf::Socket::Done) {
+    if (socket.send(outgoing_data, outgoing_data_size, return_address, return_port) != sf::Socket::Done) {
         cout << "Failed to Send Response\n";
     }
 }

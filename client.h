@@ -26,9 +26,9 @@ public:
     Ball ball = Ball(game);
 
     sf::UdpSocket socket;
-    int outgoing_data_size = sizeof(int) * 2;
+    int outgoing_data_size = 8;
     uint8_t* outgoing_data = new uint8_t[outgoing_data_size];
-    int incoming_data_size = (sizeof(int) * 2) + (sizeof(float) * 4);
+    int incoming_data_size = 40;
     uint8_t* incoming_data = new uint8_t[incoming_data_size];
 
     sf::IpAddress server_address;

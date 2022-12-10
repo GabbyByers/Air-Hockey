@@ -23,16 +23,16 @@ public:
     CrossHair client_cross;
     Ball ball = Ball(game);
 
+    int client_mouse_x = 0;
+    int client_mouse_y = 0;
+
     sf::UdpSocket socket;
     sf::IpAddress address = sf::IpAddress::getLocalAddress();
     unsigned short port = 0;
 
-    int incoming_data_size = sizeof(int) * 2;
+    int incoming_data_size = 8;
     uint8_t* incoming_data = new uint8_t[incoming_data_size];
-    int client_mouse_x = 0;
-    int client_mouse_y = 0;
-
-    int outgoing_data_size = (sizeof(int) * 2) + (sizeof(float) * 4);
+    int outgoing_data_size = 40;
     uint8_t* outgoing_data = new uint8_t[outgoing_data_size];
 
     unsigned long long bytes_received = 0;

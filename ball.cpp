@@ -111,10 +111,6 @@ void Ball::tie() {
         if (vel < trigger_respawn_vel) {
             respawn(last_serve);
         }
-        color = sf::Color(255, 0, 0);
-    }
-    else {
-        color = sf::Color(255, 255, 255);
     }
 }
 
