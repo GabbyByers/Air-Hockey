@@ -28,7 +28,7 @@ public:
     sf::UdpSocket socket;
     int outgoing_data_size = sizeof(int) * 2;
     uint8_t* outgoing_data = new uint8_t[outgoing_data_size];
-    int incoming_data_size = sizeof(int) * 2;
+    int incoming_data_size = (sizeof(int) * 2) + (sizeof(float) * 4);
     uint8_t* incoming_data = new uint8_t[incoming_data_size];
 
     sf::IpAddress server_address;
@@ -44,8 +44,6 @@ public:
     void ping_server();
 
     void receive_response();
-
-    void unpack_packet();
 
     void play(sf::RenderWindow& window);
 

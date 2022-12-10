@@ -32,7 +32,7 @@ public:
     int client_mouse_x = 0;
     int client_mouse_y = 0;
 
-    int outgoing_data_size = sizeof(float) * 8;
+    int outgoing_data_size = (sizeof(int) * 2) + (sizeof(float) * 4);
     uint8_t* outgoing_data = new uint8_t[outgoing_data_size];
 
     unsigned long long bytes_received = 0;

@@ -2,7 +2,6 @@
 #include "server.h"
 using std::cout;
 
-
 Server::Server(sf::RenderWindow& window) {
     bind();
     run(window);
@@ -24,7 +23,6 @@ void Server::bind() {
 }
 
 void Server::receive_client_packet() {
-    // Receive Message From a Client
     if (socket.receive(incoming_data, sizeof(incoming_data), bytes_received, return_address, return_port) == sf::Socket::Done) {
         client_mouse_x = *(reinterpret_cast<int*>(&incoming_data[0]));
         client_mouse_y = *(reinterpret_cast<int*>(&incoming_data[4]));
@@ -33,7 +31,15 @@ void Server::receive_client_packet() {
 }
 
 void Server::server_reponse_to_client() {
-    // Send a Response
+    int index = 0;
+    *(reinterpret_cast<int*>(&outgoing_data[index])) = host_score; index += sizeof(int);
+    *(reinterpret_cast<int*>(&outgoing_data[index])) = client_score; index += sizeof(int);
+    *(reinterpret_cast<float*>(&outgoing_data[index])) = host_handle.x_pos; index += sizeof(float);
+    *(reinterpret_cast<float*>(&outgoing_data[index])) = host_handle.y_pos; index += sizeof(float);
+    *(reinterpret_cast<float*>(&outgoing_data[index])) = client_handle.x_pos; index += sizeof(float);
+    *(reinterpret_cast<float*>(&outgoing_data[index])) = client_handle.y_pos; index += sizeof(float);
+    cout << "HX = " << host_handle.x_pos << ", HY = " << host_handle.y_pos << ", CX = " << client_handle.x_pos << ", CY = " << client_handle.y_pos << "\n";
+    
     if (socket.send(outgoing_data, sizeof(outgoing_data), return_address, return_port) != sf::Socket::Done) {
         cout << "Failed to Send Response\n";
     }

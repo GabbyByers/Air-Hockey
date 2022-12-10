@@ -30,10 +30,15 @@ void Client::receive_response() {
     if (socket.receive(incoming_data, sizeof(incoming_data), bytes_received, return_address, return_port) != sf::Socket::Done) {
         cout << "Failed to Receive Packet\n";
     }
-}
-
-void Client::unpack_packet() {
-
+    int index = 0;
+    host_score = *(reinterpret_cast<int*>(&incoming_data[index])); index += sizeof(int);
+    client_score = *(reinterpret_cast<int*>(&incoming_data[index])); index += sizeof(int);
+    host_handle.x_pos = *(reinterpret_cast<float*>(&incoming_data[index])); index += sizeof(float);
+    host_handle.y_pos = *(reinterpret_cast<float*>(&incoming_data[index])); index += sizeof(float);
+    client_handle.x_pos = *(reinterpret_cast<float*>(&incoming_data[index])); index += sizeof(float);
+    client_handle.y_pos = *(reinterpret_cast<float*>(&incoming_data[index])); index += sizeof(float);
+    cout << "same?\n";
+    cout << "HX = " << host_handle.x_pos << ", HY = " << host_handle.y_pos << ", CX = " << client_handle.x_pos << ", CY = " << client_handle.y_pos << "\n";
 }
 
 void Client::play(sf::RenderWindow& window) {
@@ -41,7 +46,6 @@ void Client::play(sf::RenderWindow& window) {
         control(window);
         ping_server();
         receive_response();
-        unpack_packet();
         view(window);
     }
 }
@@ -61,6 +65,7 @@ void Client::view(sf::RenderWindow& window) {
     backround.draw(window);
     host_handle.draw(window);
     client_handle.draw(window);
+    cout << "HX = " << host_handle.x_pos << ", HY = " << host_handle.y_pos << ", CX = " << client_handle.x_pos << ", CY = " << client_handle.y_pos << "\n";
     ball.draw(window);
     host_cross.draw(window, host_mouse_x, host_mouse_y);
     client_cross.draw(window, mouse.x, mouse.y);

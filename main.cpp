@@ -3,15 +3,9 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "backround.h"
-#include "ball.h"
 #include "client.h"
-#include "crosshair.h"
-#include "game.h"
-#include "handle.h"
-#include "mouse.h"
-#include "scoreboard.h"
 #include "server.h"
+#include "game.h"
 using std::cout;
 using std::cin;
 using std::vector;
